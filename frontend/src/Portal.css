@@ -1,0 +1,68 @@
+* {
+	box-sizing : border-box;
+}
+
+.studentPortal {
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	min-Width : 100%;
+	min-height : 100%;
+}
+
+#search{
+ min-width : 80% ;
+}
+
+.navbar-brand  {
+	list-style : none;
+}
+
+.content  {
+	min-width : 100%;
+	background-color : black;
+	display : inline-block;
+	min-height : 100%;
+	position : absolute;
+}
+
+.Feeds {
+	float : left;
+	margin-left : 5%;
+	margin-top : 2%;
+	width : 13%;
+	background-color : white;
+	height : 300px;
+}
+
+.Posts {
+	float : left;
+	width : 60%;
+	min-height : 70%;
+	background-color : white;
+	margin-left : 2%;
+	margin-top : 2%;
+	overflow : auto;
+}
+
+.Connection {
+	float : left;
+	margin-left : 2%;
+	margin-right : 5%;
+	margin-top : 2%;
+	width : 13%;
+	background-color : white;
+	height : 300px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .Posts{
+        margin-left : 0px;
+		margin-right : 0px;
+		width : 100%;
+    }
+	.Connection,.Feeds {
+		display : none;
+	}
+}
