@@ -20,39 +20,47 @@
 
 .content  {
 	min-width : 100%;
-	background-color : black;
 	display : inline-block;
 	min-height : 100%;
 	position : absolute;
 }
 
+.displayContent {
+	float : left;
+	width : 85%;
+	height : 100%;
+	position : absolute;
+}
+
 .Feeds {
 	float : left;
-	margin-left : 5%;
-	margin-top : 2%;
-	width : 13%;
-	background-color : white;
-	height : 300px;
+	top : 15%;
+	width : 18%;
+	margin-left : 2%;
+	background-color : yellow;
+	height : 70%;
+	position : sticky;
+	overflow : auto;
 }
 
 .Posts {
 	float : left;
 	width : 60%;
-	min-height : 70%;
-	background-color : white;
-	margin-left : 2%;
-	margin-top : 2%;
-	overflow : auto;
+	background-color : green;
+	margin-left : 30%;
+	margin-top : 0%;
+	position : absolute;
 }
 
 .Connection {
 	float : left;
-	margin-left : 2%;
-	margin-right : 5%;
-	margin-top : 2%;
-	width : 13%;
-	background-color : white;
-	height : 300px;
+	left : 85%;
+	width : 15%;
+	background-color : blue;
+	bottom : 0px;
+	top : 8%;
+	right : 0px;
+	position : fixed; 
 }
 
 @media only screen and (max-width: 768px) {
@@ -64,5 +72,9 @@
     }
 	.Connection,.Feeds {
 		display : none;
+	}
+	
+	.displayContent {
+		width : 100%;
 	}
 }

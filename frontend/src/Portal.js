@@ -19,7 +19,7 @@ class Portal extends Component {
 		return(
 				<div className = 'studentPortal'>
 		
-					<section className = 'header' style = {{border : '2px solid white', margin : '0px', minHeight : '5%'}}>
+					<section className = 'header' style = {{position :'sticky', top : '0px',zIndex : '1',minWidth : '100%'}}>
 						<nav className = 'navbar navbar-default'  style = {{margin : '0px'}}>
 							<div className = 'container-fluid'>
 							<div className = 'navbar-header'>
@@ -47,13 +47,26 @@ class Portal extends Component {
 						</nav>
 					</section>
 					<section className =  'content'>
-						<Feeds />
-						<Posts />
+						<div className = 'displayContent'>
+							<ContentDisplay />
+						</div>	
 						<Connection />
 					</section>
 
 				</div>
 	) }
+}
+
+class ContentDisplay extends Component {
+
+		render() {
+			return(
+				<React.Fragment>
+					<Feeds />
+					<Posts />
+				</React.Fragment>
+			);
+		}
 }
 
 export default Portal;

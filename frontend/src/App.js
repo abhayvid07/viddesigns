@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
-import Loadable from 'react-loadable';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Loadable from 'react-loadable';
 
-const LoadableLogin = Loadable({
-	loader : () =>  import('./Login'),
-	loading : () => <div>Loading</div>
+const Welcomepage = Loadable({
+	loader : () => import('./WelcomePage'),
+	loading : () => <div> Loading </div>
 });
 
-const LoadableSignup = Loadable( {
-	loader : () => import('./Signup'),
-	loading : () => <div>Loading</div>
+const Portal = Loadable({
+	loader : () => import('./Portal'),
+	loading : () => <div> Loading </div>
 });
 
-const LoadableMainPage = Loadable( {
-	loader : () =>  import('./MainPage'),
-	loading : () => <div>Loading</div>
-});
 
 class App extends Component {
 
@@ -31,12 +27,10 @@ class App extends Component {
 		<Router>
 			<div className="App">
 				<div className = 'container-fluid'>
-				<video autoPlay muted loop id = 'homeVideo'>
-					<source src = { require ('./media/homeVideo.mp4') } type = 'video/mp4' />
-				</video>
-				<Route exact path = '/' component = {LoadableMainPage} />
-				<Route exact path = '/login' component = {LoadableLogin} />
-				<Route exact path = '/signup' component = {LoadableSignup} />
+					<Switch>
+						<Route exact path = '/login/Home' component = {Portal} /> 
+						<Route path = '/' component = {Welcomepage} />  
+					</Switch>
 				</div>
 			</div>
 			
@@ -44,5 +38,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;

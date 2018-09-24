@@ -6,24 +6,6 @@ import { Link } from 'react-router-dom';
 
 class Login extends Component {
 
-//code added
-state = {
-    logins: []
-  };
-
-  async componentDidMount() {
-    try {
-      const res = await fetch('http://127.0.0.1:8000/api/test/');
-      const logins = await res.json();
-      this.setState({
-        logins
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-//code added close'''
-
 	constructor(props)
 	{
 			super(props);
@@ -40,14 +22,6 @@ state = {
 		return (
 				<div id = 'homeLogin'>
 					<form id = 'login' className = 'form-horizontal'>
-
-					        {this.state.logins.map(item =>(
-					        <div key={item.id}>
-					            {item.fieldone}<br/>
-					            {item.fieldtwo}
-					        </div>
-					        ))}
-
 							<div className = 'form-group'>
 								<label htmlFor = 'Username' className = 'info-label col-xs-3'>User name</label>
 								<div className = 'col-xs-8'>
