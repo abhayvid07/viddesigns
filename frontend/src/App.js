@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Styles/App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 const Welcomepage = Loadable({
-	loader : () => import('./WelcomePage'),
+	loader : () => import('./WelcomePage/WelcomePage'),
 	loading : () => <div> Loading </div>
 });
 
 const Portal = Loadable({
-	loader : () => import('./Portal'),
+	loader : () => import('./HomePage/Portal'),
 	loading : () => <div> Loading </div>
 });
 
@@ -19,7 +18,7 @@ class App extends Component {
 
 	
 	componentDidCatch(err, info) {
-			console.log(err + ' : ' + info);
+		console.log(err + ' : ' + info);
 	}
 
   render() {
