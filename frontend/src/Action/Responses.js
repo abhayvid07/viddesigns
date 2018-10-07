@@ -6,24 +6,30 @@ export const ResponseAction = {
 	error
 }
 
-function success(data){ 
+function UserData(data){ 
 	return { 
-		type : UserConstants.LOGIN_REQUEST,
-		payload : true,
+		type : UserConstants.LOAD_DATA,
 		data 
 	}	
 };
 
 function failure(){ 
 	return {
-		type : UserConstants.LOGIN_REQUEST,
-		payload : false
+		type : UserConstants.REQUEST_FAILED,
+		payload : 'not found'
 	}
 };
 
-function error(){
+function error(info){
 	return { 
 		type : UserConstants.PAGE_ERROR,
-		payload : true
+		info
 	} 
+};
+
+function success() {
+	return {
+		type : UserConstants.LOGIN_REQUEST,
+		payload : true
+	}
 };

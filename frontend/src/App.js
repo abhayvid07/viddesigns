@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './Styles/App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import {history} from './Helpers/history.js';
 import Loadable from 'react-loadable';
+import {connect} from 'react-redux';
 
 const Welcomepage = Loadable({
 	loader : () => import('./WelcomePage/WelcomePage'),
@@ -16,6 +18,16 @@ const Portal = Loadable({
 
 class App extends Component {
 
+	constructor(props) {
+		super(props);	
+		const homeRegex = /^(\/login\/home)(\/*[a-zA-Z]*)/;
+	
+		if(homeRegex.test(history.location.pathname))
+		{
+			console.log(this.props.loggedIn);
+			history.goBack();
+		}
+	}
 	
 	componentDidCatch(err, info) {
 		console.log(err + ' : ' + info);
@@ -23,11 +35,11 @@ class App extends Component {
 
   render() {
     return (
-		<Router>
+		<Router history = {history}>
 			<div className="App">
 				<div className = 'container-fluid'>
 					<Switch>
-						<Route exact path = '/login/Home' component = {Portal} /> 
+						<Route path = '/login/Home' component = {Portal} /> 
 						<Route path = '/' component = {Welcomepage} />  
 					</Switch>
 				</div>

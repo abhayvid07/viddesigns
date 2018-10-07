@@ -54,6 +54,13 @@ label {
 	margin-bottom  : 15px;
 }
 
+.requestFailure {
+	text-align : center;
+	color : red; 
+	font-size : 15px;
+	margin : 0px
+}
+
 @media only screen and (max-width : 762px) {
 	label {
 		margin : 0px;
@@ -67,3 +74,4 @@ label {
 		height : 100%;
 	}
 }
+

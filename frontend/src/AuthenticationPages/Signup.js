@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../Styles/Home.css';
-
+import {connect} from 'react-redux';
+import {AuthActions} from '../Action/Authentication.js';
 
 class Signup extends Component {
 
@@ -12,6 +13,7 @@ class Signup extends Component {
 		this.firstNameRef =  React.createRef();
 		this.lastNameRef =  React.createRef();
 		this.signupEmail = React.createRef();
+		this.state = {submitted : false};
 	}
 
 	render() {
@@ -37,6 +39,7 @@ class Signup extends Component {
 									<label htmlFor = 'Username' className = 'info-label col-xs-4'>* User name</label>
 									<div className = 'col-xs-7'>
 										<input type = 'text' className = 'form-control' name = 'Username' placeholder = 'Enter User name' onBlur= {this.onValidation} />
+										{this.state.submitted && <div className = 'requestFailure'>{this.props.message}</div>}
 									</div>
 								</div>
 								<div className = 'form-group'>
@@ -205,6 +208,8 @@ class Signup extends Component {
 	
 	onSignupClick(event) {
 		
+		event.preventDefault();
+		
 		const signupFormElem = document.getElementById('signup').elements;
 		const pTextElem = document.getElementsByTagName('P');
 		if (this.onValidation(event) !== 1)
@@ -230,16 +235,15 @@ class Signup extends Component {
 						}
 					}
 		
-					axios.post('http://localhost:4000/asd', {
-								data : JSON.stringify(formData)	})
-						.then(response => console.log(response))
-						.catch(error => console.log(error));
-		
+					this.props.dispatch(AuthActions.signForgot(formData));	
+					this.setState({submitted : true});
 			}
-		}
-		event.preventDefault();
-		
+		}		
 	}
 }
 
-export default Signup;
+export default connect((store) => {
+	return {
+		message : store.Authentication.message
+	}
+})(Signup);

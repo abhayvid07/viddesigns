@@ -1,44 +1,50 @@
-import {UserConstants} from '../Constants/UserConstant.js';
 import {Services} from '../Helpers/Service.js';
 import {ResponseAction} from './Responses.js';
+import {history} from '../Helpers/history.js';
 
 export const AuthActions = {
 	login,
-	signup,
-	forgot
+	signForgot
 }
 
 function login(credential) {
 
 	return dispatch => {
-        Services.loginService(credential)
+        Services.authService(credential)
 		.then((response) => {
 			if (response.status === 200)
 			{
-				dispatch(ResponseAction.success(response));
+				dispatch(ResponseAction.success());
+				dispatch(ResponseAction.UserData(response));
+				history.push('/login/home');
 			}
 			else
 			{
 				dispatch(ResponseAction.failure());
 			}
 		})
-		.catch((response) => {
-			dispatch(ResponseAction.error());
+		.catch((err) => {
+			dispatch(ResponseAction.error(err.message));
 		});
-		
     };	
 }
 
-function signup(data) {
-	return {
-		type : UserConstants.SIGNUP_REQUEST,
-		payload : data
-	}
-}
-
-function forgot(data) {
-	return {
-		type : UserConstants.FORGOT_REQUEST,
-		payload : data
+function signForgot(data) {
+	
+	return dispatch => {
+		Services.authService(data)
+		.then((response) => {
+			if(response.status === 200)
+			{
+				history.push('/login');
+			}
+			else
+			{
+				dispatch(ResponseAction.failure());
+			}
+		})
+		.catch((error) => {
+			dispatch(ResponseAction.error());
+		});	
 	}
 }

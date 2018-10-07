@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Loadable from 'react-loadable';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 const LoadableLogin = Loadable({
 	loader : () =>  import('../AuthenticationPages/Login'),
@@ -25,9 +25,11 @@ class WelcomePage extends Component {
 				<video autoPlay muted loop id = 'homeVideo'>
 					<source src = { require ('../media/homeVideo.mp4') } type = 'video/mp4' />
 				</video>
-				<Route exact path = '/' component = {LoadableMainPage} />
-				<Route exact path = '/login' component = {LoadableLogin} />
-				<Route exact path = '/signup' component = {LoadableSignup} />
+				<Switch>
+					<Route path = '/login' component = {LoadableLogin} />
+					<Route path = '/signup' component = {LoadableSignup} />
+					<Route path = '/' component = {LoadableMainPage} />
+				</Switch>
 			</React.Fragment>
 		)	
 	}

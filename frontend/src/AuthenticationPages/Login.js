@@ -10,15 +10,22 @@ class Login extends Component {
 			super(props);
 			this.forgotClick = this.forgotClick.bind(this);
 			this.getLogin = this.getLogin.bind(this);
+			this.getForgot = this.getForgot.bind(this);
+			this.closeModal = this.closeModal.bind(this);
 			this.userNameRef = React.createRef();
 			this.passwordRef = React.createRef();
-			this.getForgot = this.getForgot.bind(this);
 			this.forgotEmail = React.createRef();
+			this.state = {loginClick : false, forgotClick : false};
 	}
 
+	componentDidMount() {
+		document.getElementById('forgotForm').addEventListener('show',this.closeModal);	
+	}
+	
 	render() {
 		return (
 				<div id = 'homeLogin'>
+					{this.state.loginClick && <div className = 'requestFailure'>{this.props.message}</div>}
 					<form id = 'login' className = 'form-horizontal'>
 							<div className = 'form-group'>
 								<label htmlFor = 'Username' className = 'info-label col-xs-3'>User name</label>
@@ -78,6 +85,7 @@ class Login extends Component {
 										<p style = {{color : 'red'}}>Reset Link will be sent to Email id</p>
 									</div>
 									<div className = 'modal-body'>
+										{this.state.forgotClick && <div className = 'requestFailure'>{this.props.message}</div>}
 										<form id = 'Forgot' className = 'form-horizontal'>
 											<div className = 'form-group'>
 												<label htmlFor = 'Email' className = 'col-xs-3'>Email Id * </label>
@@ -85,7 +93,7 @@ class Login extends Component {
 													ref = {this.forgotEmail}/>
 											</div>
 											<div style = {{textAlign : 'right'}}>
-													<button className = 'btn btn-info ' onClick = {this.getForgot}>Send</button>
+													<button className = 'btn btn-info' onClick = {this.getForgot}>Send</button>
 											</div>
 										</form>
 									</div>
@@ -139,35 +147,43 @@ class Login extends Component {
 			 loginCred['username'] = elemValueUserName;
 			 loginCred['password'] = elemValuePassword;
 			 this.props.dispatch(AuthActions.login(loginCred));
+			 this.setState({loginClick : true});
 		}	
 	}
 	
 	getForgot(e) {
 	
 		e.preventDefault();
-
+		
 		const errorExists = this.forgotEmail.current.nextSibling !== null ? true : false;
 		const regEmail1 = /^[a-zA-Z0-9]*([a-zA-Z0-9]+[.])*[a-zA-Z0-9]+(@[a-zA-Z0-9]+\.(?=(com|in|co.uk)$))/;
 		const regEmail2 = /(?=[.]{2,})/;
+		const value = this.forgotEmail.current.value;
 		
-		if(errorExists  ===  false && (regEmail1.test(this.forgotEmail.current.value) === false ||  regEmail2.test(this.forgotEmail.current.value) === true ))
+		if(errorExists  ===  false && (regEmail1.test(value) === false ||  regEmail2.test(value) === true ))
 		{
 			 const forgotError = document.createElement('P')
 			 forgotError.innerHTML = 'Please provide valid email id';
 			 this.forgotEmail.current.parentNode.append(forgotError);
 		}
-		else if(regEmail1.test(this.forgotEmail.current.value) === true &&  regEmail2.test(this.forgotEmail.current.value) === false )
+		else if(regEmail1.test(value) === true &&  regEmail2.test(value) === false )
 		{
 			 if(errorExists)
 			 {
 				this.forgotEmail.current.nextSibling.remove();		
 			 }
-			
+			this.props.dispatch(AuthActions.signForgot({'email' : value}));
+			this.setState({forgotClick : true});
 		}
+	}
+	
+	closeModal() {
+		alert('ok');	
 	}
 }
 
 export default connect((Store) => {
 	return {
-	Auth : Store.Authentication.error }
+		message : Store.Authentication.message
+	}
 })(Login);

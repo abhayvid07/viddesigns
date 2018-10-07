@@ -10,7 +10,7 @@ class Posts extends Component {
 	render() {
 		return(
 			<div>
-				{this.props.posts.map((value,index) => {<PostsBlock key = {index} data = {value} />})}
+				Posts
 			</div>
 		);
 	}
