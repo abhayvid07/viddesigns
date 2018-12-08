@@ -19,7 +19,7 @@ class userdata(models.Model):
     category = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, default='Male')
-    dob = models.DateField(auto_now=True)
+    dob = models.DateField(auto_now=False)
 
     class Meta:
         db_table = "userdata"

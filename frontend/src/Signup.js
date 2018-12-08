@@ -7,23 +7,91 @@ class Signup extends Component {
 
 	constructor(props) {
 		super(props);
-		this.onSignupClick = this.onSignupClick.bind(this);
+		//this.onSignupClick = this.onSignupClick.bind(this);
 		this.onValidation = this.onValidation.bind(this);
 		this.firstNameRef =  React.createRef();
 		this.lastNameRef =  React.createRef();
 		this.signupEmail = React.createRef();
 	}
 
+
+	handleFormSubmit = async (event, requestType) => {
+    event.preventDefault();
+    const firstName = event.target.elements.Firstname.value;
+		const lastName = event.target.elements.lastname.value;
+		const userName = event.target.elements.Username.value;
+		const password = event.target.elements.Password.value;
+		const category = event.target.elements.category.value;
+		const email = event.target.elements.Email.value;
+		const gender = event.target.elements.Gender.value;
+		const dob = event.target.elements.DOB.value;
+
+		console.log(firstName, lastName, password, category, email, gender, dob);
+
+		axios.post('http://localhost:8000/api/signup/', {
+		    firstname: firstName,
+		    lastname: lastName,
+		    username: userName,
+		    password: password,
+		    category: category,
+		    email: email,
+		    gender: gender,
+		    dob: dob
+		})
+		.then(res => console.log(res))
+		.catch(error => console.err(error));
+/*
+    const postObj = {
+        firstName : event.target.elements.Firstname.value,
+		lastName : event.target.elements.lastname.value,
+		userName : event.target.elements.Username.value,
+		password : event.target.elements.Password.value,
+		category : event.target.elements.category.value,
+		email : event.target.elements.Email.value,
+		gender : event.target.elements.Gender.value,
+		dob : event.target.elements.DOB.value
+    }
+*/
+/*
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${this.props.token}`,
+    };
+    */
+/*
+    if (requestType === "post") {
+      await axios.post("http://localhost:8000/api/signup/", postObj)
+        .then(res => {
+          if (res.status === 201) {
+            this.props.history.push(`/`);
+          }
+        })
+    }*/ /*else if (requestType === "put") {
+      await axios.put(`http://127.0.0.1:8000/api/${articleID}/update/`, postObj)
+        .then(res => {
+          if (res.status === 200) {
+            this.props.history.push(`/`);
+          }
+        })
+    }*/
+  };
+
+
 	render() {
 		return (
 					<div>
 						<div id = "signupForm">
 							<a data-toggle = 'modal' data-target = '#policy'><span className = 'glyphicon glyphicon-info-sign col-xs-11' style = {{textAlign : 'right',color : 'green',marginTop : '3%',marginBottom : '2%'}}></span></a>
-							<form id = 'signup' className = 'form-horizontal'>
+							<form id = 'signup' className = 'form-horizontal'  onSubmit={(event) =>
+            this.handleFormSubmit(
+              event,
+              "post" )}>
 								<div className = 'form-group'>
 									<label htmlFor = 'Firstname' className = 'info-label col-xs-4'>* First Name</label>
 									<div className = 'col-xs-7'>
-										<input type = 'text' className = 'form-control' name = 'Firstname' maxLength = '15' minLength = '3' placeholder = 'Enter First Name' 
+										<input type = 'text' className = 'form-control' name = 'Firstname' maxLength = '15' minLength = '3' placeholder = 'Enter First Name'
 										ref = {this.firstNameRef} onBlur= {this.onValidation}  />
 									</div>
 								</div>
@@ -48,7 +116,7 @@ class Signup extends Component {
 								<div className = 'form-group'>
 									<label htmlFor = 'Category' className = 'info-label col-xs-4'>Category</label>
 									<div className = 'col-xs-7'>
-										<select id = 'Category' className = 'form-control'>
+										<select id = 'Category' className = 'form-control' name='category'>
 											<option>Student</option>
 											<option>Professional Employee</option>
 											<option>Businessman</option>
@@ -81,7 +149,7 @@ class Signup extends Component {
 								</div>
 								<div className = 'form-group'>
 									<div className = 'col-xs-12' style = {{textAlign : 'center'}} >
-										<button className = 'btn btn-success' onClick = {this.onSignupClick} name = 'submit'>Signup</button>
+										<button className = 'btn btn-success' htmltype = 'submit' /*onClick = {this.onSignupClick}*/ name = 'submit'>Signup</button>
 									</div>
 								</div>
 							</form>
@@ -202,9 +270,10 @@ class Signup extends Component {
 			}
 		}
 	}
-	
+
+	/*
 	onSignupClick(event) {
-		
+
 		const signupFormElem = document.getElementById('signup').elements;
 		const pTextElem = document.getElementsByTagName('P');
 		if (this.onValidation(event) !== 1)
@@ -230,16 +299,26 @@ class Signup extends Component {
 						}
 					}
 		
-					axios.post('http://localhost:4000/asd', {
+					axios.post('http://localhost:8000/api/signup/', {
 								data : JSON.stringify(formData)	})
 						.then(response => console.log(response))
 						.catch(error => console.log(error));
 		
 			}
 		}
+
 		event.preventDefault();
+		const firstName = event.target.elements.Firstname.value;
+		const lastName = event.target.elements.lastname.value;
+		const userName = event.target.elements.Username.value;
+		const password = event.target.elements.Password.value;
+		const category = event.target.elements.category.value;
+		const email = event.target.elements.Email.value;
+		const gender = event.target.elements.Gender.value;
+		const dob = event.target.elements.DOB.value;
 		
-	}
+	}*/
+
 }
 
 export default Signup;

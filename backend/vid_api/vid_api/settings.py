@@ -25,7 +25,7 @@ SECRET_KEY = '08)2*0@6bgk1yo=w!i&&pt(1ry-wznyh41b@7f=ac-k8fv#^e0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -136,6 +136,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny'
     ]
 }
+
+CSRF_COOKIE_NAME = "csrftoken"

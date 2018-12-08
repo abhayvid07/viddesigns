@@ -47,10 +47,10 @@ class Login extends Component {
 								</div>
 							</div>
 							<div className = 'form-group col-xs-3' style = {{textAlign : 'right'}}>
-								<a data-toggle = 'modal' data-target = '#forgotForm'> Forgot Login </a>			
+								<a data-toggle = 'modal' data-target = '#forgotForm'> Forgot Login </a>
 							</div>
 					</form>
-					
+
 					<div className = 'modal fade' id = 'policy'>
 							<div className = 'modal-dialog'>
 								<div className = 'modal-content'>
@@ -72,7 +72,7 @@ class Login extends Component {
 								</div>
 							</div>
 						</div>
-					
+
 				<div id = 'forgotForm' className = 'modal fade' role = 'dialog'>
 							<div className="modal-dialog">
 								<div className = 'modal-content'>
@@ -83,7 +83,7 @@ class Login extends Component {
 										<form id = 'Forgot' className = 'form-horizontal'>
 											<div className = 'form-group'>
 												<label htmlFor = 'Email' className = 'col-xs-3'>Email Id * </label>
-												<input type = 'email' id = 'forgotEmail' name = 'Email' className = 'col-xs-8' placeholder = 'Enter your Email Id' 
+												<input type = 'email' id = 'forgotEmail' name = 'Email' className = 'col-xs-8' placeholder = 'Enter your Email Id'
 													ref = {this.forgotEmail}/>
 											</div>
 											<div style = {{textAlign : 'right'}}>
@@ -97,18 +97,18 @@ class Login extends Component {
 			</div>
 		)
 	}
-	
+
 	forgotClick() {
 		this.forgotFormRef.current.style.display = 'block';
 	}
-	
+
 	getLogin(e) {
-			
+
 		/*if(document.getElementById('loginRemember').checked === true)
 		{
 			new Cookies().set('loginCred',{'u_name' : document.getElementById('Username').value , 'passwd' : document.getElementById('Password').value });
 		}
-		
+
 		console.log(new Cookies().get('loginCred'));*/
 		const errorExists = this.passwordRef.current.nextSibling !== null ? true : false;
 		const regExpUname = /[^0-9a-zA-Z]/;
@@ -116,7 +116,7 @@ class Login extends Component {
 		const regExpPasswd1 = /[^0-9a-zA-Z!@#$%]/;
 		const elemValueUserName = this.userNameRef.current.value;
 		const elemValuePassword = this.passwordRef.current.value;
-		
+
 		if( (regExpUname.test(elemValueUserName) ===  true || (elemValueUserName.length < 6)) || (regExpPasswd.test(elemValuePassword) ===  false || regExpPasswd1.test(elemValuePassword) === true || (elemValuePassword.split(' ').join('').length < 8)) )
 		{
 			if(errorExists === false)
@@ -124,7 +124,7 @@ class Login extends Component {
 				const loginError = document.createElement('P')
 				loginError.innerHTML = 'Please fill all the required fields as per <a data-toggle = "modal" data-target = "#policy"> Policy </a>';
 				loginError.style.cssText = `text-align : left;
-								 color : red; 
+								 color : red;
 								 font-size : 10px;
 								 margin : 0px;`
 				this.passwordRef.current.parentNode.append(loginError);
@@ -135,20 +135,20 @@ class Login extends Component {
 		{
 			 if(errorExists === true)
 			 {
-				this.passwordRef.current.nextSibling.remove();		
+				this.passwordRef.current.nextSibling.remove();
 			 }
 			 axios.get('http://localhost:4000/asd')
 				.then(response => console.log(response))
 				.catch(error => console.log(error));
-		}	
+		}
 	}
-	
+
 	getForgot(e) {
-	
+
 		const errorExists = this.forgotEmail.current.nextSibling !== null ? true : false;
 		const regEmail1 = /^[a-zA-Z0-9]*([a-zA-Z0-9]+[\.])*[a-zA-Z0-9]+(\@[a-zA-Z0-9]+\.(?=(com|in|co.uk)$))/;
 		const regEmail2 = /(?=[\.]{2,})/;
-		
+
 		if(errorExists  ===  false && (regEmail1.test(this.forgotEmail.current.value) === false ||  regEmail2.test(this.forgotEmail.current.value) === true ))
 		{
 			 const forgotError = document.createElement('P')
@@ -159,16 +159,16 @@ class Login extends Component {
 		{
 			 if(errorExists)
 			 {
-				this.forgotEmail.current.nextSibling.remove();		
+				this.forgotEmail.current.nextSibling.remove();
 			 }
 			axios.get('http://localhost:4000/asd')
 				.then(response => console.log(response))
 				.catch(error => console.log(error));
 		}
 		e.preventDefault();
-	
+
 	}
-	
+
 	
 	modalClose() {
 		this.forgotEmail.current.value = '';
