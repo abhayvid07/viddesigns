@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import userdata, testdata
+from .models import userdatatable, testdata
 
 #testdataSerializer for testdata
 class testdataSerializer(serializers.ModelSerializer):
@@ -15,6 +15,7 @@ class testdataSerializer(serializers.ModelSerializer):
 class userdataSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            'useruniqueid',
             'firstname',
             'lastname',
             'username',
@@ -24,4 +25,4 @@ class userdataSerializer(serializers.ModelSerializer):
             'gender',
             'dob',
         )
-        model = userdata
+        model = userdatatable

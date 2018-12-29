@@ -14,6 +14,7 @@ class Signup extends Component {
 		this.signupEmail = React.createRef();
 	}
 
+    //below code is added for form submission to backend
 
 	handleFormSubmit = async (event, requestType) => {
     event.preventDefault();
@@ -270,7 +271,7 @@ class Signup extends Component {
 			}
 		}
 	}
-
+     //following code is commented
 	/*
 	onSignupClick(event) {
 
