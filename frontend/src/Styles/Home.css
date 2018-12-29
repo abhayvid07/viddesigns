@@ -1,0 +1,77 @@
+#signupForm {
+	max-width : 500px;
+	min-width : none;
+	top : 0px;
+	right : 0px;
+	left : 0px;
+	bottom : 0px;
+	margin : auto ;
+	padding : 0px;
+	position : absolute;
+	background-color : white;
+	overflow-y : auto;
+	overflow-x : hidden;
+	height : 90%;
+	border-radius : 5px;
+}
+
+#homeLogin {
+	top : 0px;
+	bottom : 0px;
+	right : 0px;
+	left : 0px;
+	height : 40%;
+	margin : auto;
+	overflow-y : auto;
+	overflow-x : hidden;
+	position : absolute;
+	padding-top : 30px;
+	padding-bottom : 30px;
+	background-color : white;
+	max-width : 500px;
+	min-width : none;
+}
+
+td {
+text-align : left ;
+}
+
+#signup {
+	margin-top : 5%;
+}
+
+label {
+	margin-top : 5px;
+	text-align : center;
+}
+
+#forgotEmail {
+	border-radius : 5px;
+	margin-top : 5px;
+}
+
+.form-group {
+	margin-bottom  : 15px;
+}
+
+.requestFailure {
+	text-align : center;
+	color : red; 
+	font-size : 15px;
+	margin : 0px
+}
+
+@media only screen and (max-width : 762px) {
+	label {
+		margin : 0px;
+	}
+	
+	#homeLogin {
+		height : 70%;
+	}
+	
+	#signupForm  {
+		height : 100%;
+	}
+}
+
